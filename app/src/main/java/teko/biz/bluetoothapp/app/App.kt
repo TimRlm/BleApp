@@ -36,6 +36,7 @@ class App: Application(), BeaconConsumer, RangeNotifier {
         beaconManager.beaconParsers.add(BeaconParser().setBeaconLayout(BeaconParser.EDDYSTONE_TLM_LAYOUT))
         beaconManager.foregroundBetweenScanPeriod = 0
         beaconManager.bind(this)
+        scan()
     }
 
     override fun onBeaconServiceConnect() {
@@ -54,6 +55,9 @@ class App: Application(), BeaconConsumer, RangeNotifier {
             beacons.put(bleEntity.id, bleEntity)
         }
         liveNotify()
+    }
+
+    private fun scan(){
         bleManager.scan(object : BleScanCallback(){
             override fun onScanFinished(scanResultList: MutableList<BleDevice>?) {
                 devices.clear()
@@ -62,6 +66,7 @@ class App: Application(), BeaconConsumer, RangeNotifier {
                     devices.put(bleEntity.id, bleEntity)
                 }
                 liveNotify()
+                scan()
             }
             override fun onScanStarted(success: Boolean) {}
             override fun onScanning(bleDevice: BleDevice?) {}
