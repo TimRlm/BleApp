@@ -10,9 +10,9 @@ class BleEntityMapper{
         fun map(beacon: Beacon): BleEntity{
             return BleEntity(beacon.bluetoothAddress,
                 beacon.rssi,
-                beacon.id1.toHexString(),
-                beacon.id2.toInt(),
-                beacon.id3.toInt(),
+                beacon.id1.toString(),
+                "",
+                "",
                 beacon.txPower,
                 beacon.distance)
         }

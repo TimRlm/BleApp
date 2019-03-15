@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Handler
 import android.os.Looper
 import android.os.RemoteException
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.clj.fastble.BleManager
 import com.clj.fastble.callback.BleScanCallback
@@ -36,7 +37,7 @@ class App: Application(), BeaconConsumer, RangeNotifier {
         beaconManager.beaconParsers.add(BeaconParser().setBeaconLayout(BeaconParser.EDDYSTONE_TLM_LAYOUT))
         beaconManager.foregroundBetweenScanPeriod = 0
         beaconManager.bind(this)
-        scan()
+//        scan()
     }
 
     override fun onBeaconServiceConnect() {
@@ -53,6 +54,7 @@ class App: Application(), BeaconConsumer, RangeNotifier {
         p0?.forEach { beacon ->
             val bleEntity = BleEntityMapper.map(beacon)
             beacons.put(bleEntity.id, bleEntity)
+            Toast.makeText(this,"sdfgs",0).show()
         }
         liveNotify()
     }
